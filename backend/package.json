@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Drone simulation backend node server",
+  "main": "server.ts",
+  "scripts": {
+    "test": "test",
+    "start": "node server.ts"
+  },
+  "author": "R King",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  }
+}
