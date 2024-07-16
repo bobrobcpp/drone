@@ -5,14 +5,14 @@
 }
 
 .dashboard {
-  background-color: white;
+  background-color: black;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 h1, h2 {
-  color: #333;
+  color: white;
 }
 
 .current-data {
@@ -30,5 +30,11 @@ h1, h2 {
 }
 
 .charts {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
   margin-top: 20px;
 }

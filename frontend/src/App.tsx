@@ -77,7 +77,15 @@ function App() {
           </div>
         </div>
         <div className="charts">
-          <h2>Data Over Time</h2>
+          <LineChart width={600} height={300} data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="timestamp" />
+            <YAxis yAxisId="left" />
+            <YAxis yAxisId="right" orientation="right" />
+            <Tooltip />
+            <Legend />
+            <Line yAxisId="right" type="monotone" dataKey="batteryLevel" stroke="#82ca9d" />
+          </LineChart>
           <LineChart width={600} height={300} data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="timestamp" />
@@ -86,7 +94,14 @@ function App() {
             <Tooltip />
             <Legend />
             <Line yAxisId="left" type="monotone" dataKey="altitude" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Line yAxisId="right" type="monotone" dataKey="batteryLevel" stroke="#82ca9d" />
+          </LineChart>
+          <LineChart width={600} height={300} data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="timestamp" />
+            <YAxis yAxisId="left" />
+            <YAxis yAxisId="right" orientation="right" />
+            <Tooltip />
+            <Legend />
             <Line yAxisId="left" type="monotone" dataKey="speed" stroke="#ffc658" />
           </LineChart>
         </div>
