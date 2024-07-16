@@ -31,9 +31,9 @@ class TelemetryGenerator extends Readable {
     }
   
     _generateGPSCoordinates() {
-      const baseLat = 0.000;
-      const baseLon = 0.000;
-      const variation = 0.01;
+      const baseLat = 100;
+      const baseLon = 100;
+      const variation = 2;
       return {
         latitude: +(baseLat + Math.random() * variation * 2 - variation).toFixed(6),
         longitude: +(baseLon + Math.random() * variation * 2 - variation).toFixed(6)

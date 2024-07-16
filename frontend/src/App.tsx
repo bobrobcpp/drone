@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+
+import Charts from './components/Charts/Charts';
+
 import './App.css';
 
-const MAX_DATA_POINTS = 20;
+const MAX_DATA_POINTS = 100;
 
 function App() {
   const canvasRef = useRef(null);
@@ -168,35 +170,7 @@ useEffect(() => {
           </div>
         </div>
         <canvas ref={canvasRef} width={400} height={400} />
-        <div className="charts">
-          <LineChart width={600} height={300} data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="timestamp" />
-            <YAxis yAxisId="left" />
-            <YAxis yAxisId="right" orientation="right" />
-            <Tooltip />
-            <Legend />
-            <Line yAxisId="right" type="monotone" dataKey="batteryLevel" stroke="#82ca9d" />
-          </LineChart>
-          <LineChart width={600} height={300} data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="timestamp" />
-            <YAxis yAxisId="left" />
-            <YAxis yAxisId="right" orientation="right" />
-            <Tooltip />
-            <Legend />
-            <Line yAxisId="left" type="monotone" dataKey="altitude" stroke="#8884d8" activeDot={{ r: 8 }} />
-          </LineChart>
-          <LineChart width={600} height={300} data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="timestamp" />
-            <YAxis yAxisId="left" />
-            <YAxis yAxisId="right" orientation="right" />
-            <Tooltip />
-            <Legend />
-            <Line yAxisId="left" type="monotone" dataKey="speed" stroke="#ffc658" />
-          </LineChart>
-        </div>
+        <Charts chartData={chartData} />
       </div>
     </div>
   );
