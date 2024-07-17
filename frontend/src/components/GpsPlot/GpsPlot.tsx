@@ -2,19 +2,22 @@ import { useEffect, useRef } from "react";
 import { useSensorContext } from "../../context/SensorContext"
 
 export default function GpsPlot() {
-    const canvasRef = useRef(null);
+    const frontCanvasRef = useRef(null);
+    const backCanvasRef = useRef(null);
     const sensorData = useSensorContext();
 
+    // Set up the grid and axes on the background canvas on load
     useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext("2d");
-        const width = canvas.width;
-        const height = canvas.height;
-        drawGrid(ctx, width, height, 20);
-        drawAxes(ctx, width, height);
-        drawLabels(ctx, width, height, 20);
+        const backCanvas = backCanvasRef.current;
+        const backCtx = backCanvas.getContext("2d");
+        const width = backCanvas.width;
+        const height = backCanvas.height;
+        drawGrid(backCtx, width, height, 20);
+        drawAxes(backCtx, width, height);
+        drawLabels(backCtx, width, height, 20);
     }, []);
 
+    // Update the drone position on the front canvas when gpsCoordinates change
     useEffect(() => {
         updateGPSMap(sensorData.gpsCoordinates);
     }, [sensorData.gpsCoordinates]);
@@ -71,13 +74,13 @@ export default function GpsPlot() {
     }
 
     const updateGPSMap = ({ latitude, longitude }) => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext("2d");
+        const frontCanvas = frontCanvasRef.current;
+        const ctx = frontCanvas.getContext("2d");
         ctx.clearRect(longitude - 5, latitude - 5, 10, 10);
         // Draw drone
         ctx.fillStyle = "red";
         ctx.beginPath();
-        ctx.arc(longitude, latitude, 2, 0, Math.PI * 2);
+        ctx.arc(longitude, latitude, 5, 0, Math.PI * 2);
         ctx.fill();
 
         // Display coordinates
@@ -90,6 +93,9 @@ export default function GpsPlot() {
         );
     };
     return (
-        <canvas ref={canvasRef} width={400} height={400} />
+        <div className="gps-plot">
+            <canvas ref={backCanvasRef} width={400} height={400} />
+            <canvas ref={frontCanvasRef} width={400} height={400} />
+        </div>
     )
 }
