@@ -2,7 +2,9 @@ import { useState, useCallback, useEffect } from 'react';
 import { connectWebSocket } from '../services/websocketService';
 import { processSensorData } from '../utils/sensorUtils';
 
-export function useSensorData() {
+import { SensorData } from '../types/SensorData';
+
+export function useSensorData(): SensorData {
     const [altitude, setAltitude] = useState(0);
     const [altitudeUnit, setAltitudeUnit] = useState('meters');
     const [speed, setSpeed] = useState(0);
@@ -10,7 +12,7 @@ export function useSensorData() {
     const [gpsCoordinates, setGpsCoordinates] = useState({ latitude: 0, longitude: 0 });
     const [chartData, setChartData] = useState([]);
 
-    const updateSensorData = useCallback((newData) => {
+    const updateSensorData = useCallback((newData: SensorData) => {
         if ('altitude' in newData) setAltitude(newData.altitude);
         if ('altitudeUnit' in newData) setAltitudeUnit(newData.altitudeUnit);
         if ('speed' in newData) setSpeed(newData.speed);

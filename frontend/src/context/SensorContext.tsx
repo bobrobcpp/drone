@@ -1,9 +1,11 @@
 import { createContext, useContext } from 'react';
 import { useSensorData } from '../hooks/useSensorData';
 
-const SensorContext = createContext({});
+import { SensorData } from '../types/SensorData';
 
-export function SensorProvider({ children }) {
+const SensorContext = createContext({} as SensorData);
+
+export function SensorProvider({ children }: { children: React.ReactNode }) {
     const sensorData = useSensorData();
 
     return (

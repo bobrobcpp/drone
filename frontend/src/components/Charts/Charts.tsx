@@ -14,7 +14,6 @@ import { useSensorContext } from "../../context/SensorContext";
 export default function Charts() {
     const sensorData = useSensorContext();
     const chartColors = ["#ffc658", "#82ca9d", "#8884d8"];
-    console.log(sensorData, 'sensorData')
     if (!Object.keys(sensorData).length) {
         return null;
     }
