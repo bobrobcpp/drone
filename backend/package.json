@@ -2,11 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Drone simulation backend node server",
-  "main": "src/server.ts",
-  "type": "module",
+  "main": "server.ts",
   "scripts": {
     "test": "test",
-    "start": "npx tsx src/server.ts"
+    "start": "node server.ts"
   },
   "author": "R King",
   "license": "ISC",
@@ -15,8 +14,6 @@
     "ws": "^8.18.0"
   },
   "devDependencies": {
-    "@types/node": "^20.14.11",
-    "tsx": "^4.16.2",
     "typescript": "^5.5.3"
   }
 }
