@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSensorContext } from "../../context/SensorContext"
 
 export default function GpsPlot() {
+    const [positions, setPositions] = useState([]);
+    const [dimensions] = useState({ width: 400, height: 400 });
     const frontCanvasRef = useRef(null);
     const backCanvasRef = useRef(null);
     const sensorData = useSensorContext();
@@ -10,8 +12,8 @@ export default function GpsPlot() {
     useEffect(() => {
         const backCanvas = backCanvasRef.current;
         const backCtx = backCanvas.getContext("2d");
-        const width = backCanvas.width;
-        const height = backCanvas.height;
+        const width = dimensions.width;
+        const height = dimensions.height;
         drawGrid(backCtx, width, height, 20);
         drawAxes(backCtx, width, height);
         drawLabels(backCtx, width, height, 20);
@@ -19,7 +21,8 @@ export default function GpsPlot() {
 
     // Update the drone position on the front canvas when gpsCoordinates change
     useEffect(() => {
-        updateGPSMap(sensorData.gpsCoordinates);
+        setPositions((prev) => [...prev, sensorData.gpsCoordinates]);
+        updateGPSMap(sensorData.gpsCoordinates,);
     }, [sensorData.gpsCoordinates]);
 
     // Function to draw the grid
@@ -76,21 +79,21 @@ export default function GpsPlot() {
     const updateGPSMap = ({ latitude, longitude }) => {
         const frontCanvas = frontCanvasRef.current;
         const ctx = frontCanvas.getContext("2d");
-        ctx.clearRect(longitude - 5, latitude - 5, 10, 10);
+        ctx.clearRect(0, 0, dimensions.width, dimensions.height);
+
+        // Draw previous positions
+        positions.forEach((position) => {
+            ctx.fillStyle = 'green';
+            ctx.beginPath();
+            ctx.arc(position.longitude, position.latitude, 3, 0, 2 * Math.PI);
+            ctx.fill();
+        });
+
         // Draw drone
         ctx.fillStyle = "red";
         ctx.beginPath();
         ctx.arc(longitude, latitude, 5, 0, Math.PI * 2);
         ctx.fill();
-
-        // Display coordinates
-        ctx.fillStyle = "white";
-        ctx.font = "14px Arial";
-        ctx.fillText(
-            `X: ${longitude.toFixed(2)}, Y: ${latitude.toFixed(2)}`,
-            10,
-            20,
-        );
     };
     return (
         <div className="gps-plot">
