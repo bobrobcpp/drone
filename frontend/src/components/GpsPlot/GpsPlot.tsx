@@ -3,7 +3,7 @@ import { useSensorContext } from "../../context/SensorContext"
 
 export default function GpsPlot() {
     const [positions, setPositions] = useState([]);
-    const [dimensions] = useState({ width: 400, height: 400 });
+    const [dimensions] = useState({ width: 800, height: 400 });
     const frontCanvasRef = useRef(null);
     const backCanvasRef = useRef(null);
     const sensorData = useSensorContext();
@@ -60,19 +60,19 @@ export default function GpsPlot() {
             ctx.arc(position.longitude, dimensions.height - position.latitude, 3, 0, 2 * Math.PI);
             ctx.fill();
         });
-        if (positions.length > 10) {
+        if (positions.length > 100) {
             setPositions(positions.slice(1));
         }
         // Draw drone
         ctx.fillStyle = "red";
         ctx.beginPath();
-        ctx.arc(longitude, dimensions.height - latitude, 5, 0, Math.PI * 2);
+        ctx.arc(longitude, dimensions.height - latitude, 7, 0, Math.PI * 2);
         ctx.fill();
     };
     return (
         <div className="gps-plot">
-            <canvas ref={backCanvasRef} width={400} height={400} />
-            <canvas ref={frontCanvasRef} width={400} height={400} />
+            <canvas ref={backCanvasRef} width={800} height={400} />
+            <canvas ref={frontCanvasRef} width={800} height={400} />
         </div>
     )
 }

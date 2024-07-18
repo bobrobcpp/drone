@@ -7,7 +7,6 @@ import {
     XAxis,
     YAxis,
 } from "recharts";
-import GaugeChart from 'react-gauge-chart'
 
 import { useSensorContext } from "../../context/SensorContext";
 
@@ -17,17 +16,18 @@ export default function Charts() {
     if (!Object.keys(sensorData).length) {
         return null;
     }
-    const { timestamp, gpsCoordinates, chartData, altitudeUnit, ...rest } = sensorData;
+    // Remove unnecessary keys to display only chart data
+    const { timestamp, timeDiff, gpsCoordinates, chartData, altitudeUnit, batteryLevel, ...rest } = sensorData;
+
     return (
         <div>
-            <GaugeChart id="gauge-chart1" percent={sensorData.batteryLevel / 100} animate={false} nrOfLevels={30} colors={["#DB0032", "#ff6d2b", "#66ec0a"]} style={{ height: 250, width: 250 }} />
             <div className="charts">
                 {Object.keys(rest).map((key, index) => (
                     <LineChart width={600} height={300} data={sensorData.chartData} key={index}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="timestamp" />
-                        <YAxis yAxisId="left" />
-                        <YAxis yAxisId="right" orientation="right" />
+                        <XAxis dataKey="timeString" tickCount={1} interval={'equidistantPreserveStart'} />
+                        <YAxis yAxisId="left" domain={[0, 40]} />
+                        <YAxis yAxisId="right" orientation="right" dataKey={key} domain={[0, 40]} />
                         <Tooltip />
                         <Legend />
                         <Line

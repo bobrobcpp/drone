@@ -1,25 +1,32 @@
 import { useState, useCallback, useEffect } from 'react';
 import { connectWebSocket } from '../services/websocketService';
-import { processSensorData } from '../utils/sensorUtils';
+import { processSensorDataForCharting } from '../utils/sensorUtils';
 
-import { SensorData } from '../types/SensorData';
+import { SensorData, ChartableData } from '../types/SensorData';
 
 export function useSensorData(): SensorData {
     const [altitude, setAltitude] = useState(0);
     const [altitudeUnit, setAltitudeUnit] = useState('meters');
     const [speed, setSpeed] = useState(0);
     const [batteryLevel, setBatteryLevel] = useState(0);
+    const [temperature, setTemperature] = useState(0);
     const [gpsCoordinates, setGpsCoordinates] = useState({ latitude: 0, longitude: 0 });
-    const [chartData, setChartData] = useState([]);
+    const [timestamp, setTimestamp] = useState(0);
+    const [timeDiff, setTimeDiff] = useState(0);
+    const [chartData, setChartData] = useState([] as ChartableData[]);
 
     const updateSensorData = useCallback((newData: SensorData) => {
         if ('altitude' in newData) setAltitude(newData.altitude);
         if ('altitudeUnit' in newData) setAltitudeUnit(newData.altitudeUnit);
         if ('speed' in newData) setSpeed(newData.speed);
         if ('batteryLevel' in newData) setBatteryLevel(newData.batteryLevel);
+        if ('temperature' in newData) setTemperature(newData.temperature);
         if ('gpsCoordinates' in newData) setGpsCoordinates(newData.gpsCoordinates);
-
-        setChartData(prevChartData => processSensorData(newData, prevChartData));
+        if ('timestamp' in newData) {
+            setTimestamp(newData.timestamp);
+            setTimeDiff((newData.timestamp - Date.now()) / 1000);
+        }
+        setChartData(prevChartData => processSensorDataForCharting(newData, prevChartData));
     }, []);
 
     useEffect(() => {
@@ -32,7 +39,10 @@ export function useSensorData(): SensorData {
         altitudeUnit,
         speed,
         batteryLevel,
+        temperature,
         gpsCoordinates,
+        timestamp,
+        timeDiff,
         chartData
     };
 }

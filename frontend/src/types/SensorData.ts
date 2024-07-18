@@ -3,9 +3,16 @@ export interface SensorData {
     altitudeUnit: string;
     speed: number;
     batteryLevel: number;
+    temperature: number;
     gpsCoordinates: {
         latitude: number;
         longitude: number;
     };
-    chartData: any[];
+    timestamp: number;
+    timeDiff: number;
+    chartData: ChartableData[];
+}
+
+export interface ChartableData extends SensorData {
+    timeString: string;
 }
