@@ -4,7 +4,7 @@ import { WebSocketServer } from 'ws';
 import TG from './TelemetryGenerator'
 
 const app = express();
-const wss = new WebSocketServer({ port: 5000, path: '/telemetry' });
+const wss = new WebSocketServer({ port: 3000, path: '/telemetry' });
 
 wss.on('connection', (ws) => {
     console.log('Client connected');

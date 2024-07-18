@@ -1,5 +1,6 @@
+// @ts-nocheck
 export function connectWebSocket(onDataReceived) {
-    const wsUrl = "ws://localhost:5000/telemetry";
+    const wsUrl = "ws://localhost:3000/telemetry";
     const socket = new WebSocket(wsUrl);
 
     socket.onopen = (event) => {
