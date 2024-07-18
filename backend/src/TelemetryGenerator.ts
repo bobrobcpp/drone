@@ -2,66 +2,84 @@ import { Readable } from 'stream';
 
 export default class TelemetryGenerator extends Readable {
   static simulatedBatteryValue: number;
+  static simulatedTemperatureValue: number;
+  _interval: NodeJS.Timeout | null;
   constructor(options) {
     super(options);
     this._interval = null;
     TelemetryGenerator.simulatedBatteryValue = 100;
+    TelemetryGenerator.simulatedTemperatureValue = 20;
   }
 
   _read() {
     if (!this._interval) {
       this._interval = setInterval(() => {
-        const telemetryData = this._generateTelemetryData();
+        const telemetryData = this.generateTelemetryData();
         this.push(JSON.stringify(telemetryData));
       }, 1000);
     }
   }
 
-  _generateTelemetryData() {
+  generateTelemetryData() {
     return {
-      altitude: this._generateAltitude(),
-      gpsCoordinates: this._generateGPSCoordinates(),
+      altitude: this.generateAltitude(),
+      gpsCoordinates: this.generateGPSCoordinates(),
+      temperature: this.generateTemperatureValue(),
       batteryLevel: this.generateSimulatedBatteryValue(),
-      speed: this._generateSpeed(),
+      speed: this.generateSpeed(),
       timestamp: Date.now()
     };
   }
 
-  _generateAltitude() {
-    const baseAltitude = 0;
-    const variation = 10;
+  generateAltitude() {
+    const baseAltitude = 20;
+    const variation = 4;
     return +(baseAltitude + Math.random() * variation * 2 - variation).toFixed(2);
   }
 
-  _generateGPSCoordinates() {
-    const baseLat = 100;
-    const baseLon = 100;
-    const variation = 20;
+  generateGPSCoordinates() {
+    const baseLat = 200;
+    const baseLon = 400;
+    const variation = 50;
     return {
       latitude: +(baseLat + Math.random() * variation * 2 - variation).toFixed(6),
       longitude: +(baseLon + Math.random() * variation * 2 - variation).toFixed(6)
     };
   }
 
-  _generateBatteryLevel() {
-    return Math.floor(Math.random() * 101);
+  generateTemperatureValue() {
+    // Simulate temperature increasing over time but reset to 20 when overheated
+    const doRarely = Math.random() < 0.1;
+    if (doRarely) {
+      if (TelemetryGenerator.simulatedTemperatureValue > 60) {
+        TelemetryGenerator.simulatedTemperatureValue = 20;
+      } else {
+        TelemetryGenerator.simulatedTemperatureValue += 1;
+      }
+    }
+    return TelemetryGenerator.simulatedTemperatureValue;
   }
 
   generateSimulatedBatteryValue() {
-    const doVeryRarely = Math.random() < 0.1;
-    if (doVeryRarely) {
-      TelemetryGenerator.simulatedBatteryValue -= 1;
+    // Simulate battery level decreasing over time but reset to 100% when drained
+    const doRarely = Math.random() < 0.1;
+    if (doRarely) {
+      if (TelemetryGenerator.simulatedBatteryValue < 0) {
+        TelemetryGenerator.simulatedBatteryValue = 100;
+      } else {
+        TelemetryGenerator.simulatedBatteryValue -= 1;
+      }
     }
     return TelemetryGenerator.simulatedBatteryValue;
   }
 
-  _generateSpeed() {
+  generateSpeed() {
     const baseSpeed = 15;
-    const variation = 5;
+    const variation = 2;
     return +(baseSpeed + Math.random() * variation * 2 - variation).toFixed(2);
   }
 
-  destroy() {
+  _destroy() {
     clearInterval(this._interval);
     super.destroy();
   }
