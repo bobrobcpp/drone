@@ -20,12 +20,14 @@ h1, h2 {
 }
 
 .data-item {
+  font-size: 2rem;
   margin-bottom: 10px;
+  color: green;
 }
 
 .label {
   font-weight: bold;
-  color: #555;
+  color: white;
   margin-right: 10px;
 }
 
@@ -43,7 +45,7 @@ h1, h2 {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  width: 400px;
+  width: 800px;
   height: 400px;
 }
 
@@ -52,4 +54,22 @@ canvas {
   grid-row: 1 / -1;
   width: 100%;
   height: 100%;
+}
+
+.key-info {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.gauge-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+  place-items: center;
 }
