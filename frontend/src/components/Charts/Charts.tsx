@@ -25,7 +25,7 @@ export default function Charts() {
                 {Object.keys(rest).map((key, index) => (
                     <LineChart width={600} height={300} data={sensorData.chartData} key={index}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="timeString" tickCount={1} interval={'equidistantPreserveStart'} />
+                        <XAxis dataKey="timeString" />
                         <YAxis yAxisId="left" domain={[0, 40]} />
                         <YAxis yAxisId="right" orientation="right" dataKey={key} domain={[0, 40]} />
                         <Tooltip />
@@ -35,6 +35,7 @@ export default function Charts() {
                             type="monotone"
                             dataKey={key}
                             stroke={chartColors[index]}
+                            name={key.charAt(0).toUpperCase() + key.slice(1)}
                         />
                     </LineChart>
                 ))}
