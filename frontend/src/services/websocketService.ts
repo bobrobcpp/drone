@@ -1,8 +1,10 @@
-export function connectWebSocket(onDataReceived) {
+import { SensorData } from '../types/SensorData';
+
+export function connectWebSocket(onDataReceived: (data: SensorData) => void) {
     const wsUrl = "ws://localhost:3000/telemetry";
     const socket = new WebSocket(wsUrl);
 
-    socket.onopen = (event) => {
+    socket.onopen = () => {
         console.log("Connected to WebSocket server");
     };
 
@@ -15,7 +17,7 @@ export function connectWebSocket(onDataReceived) {
         console.error("WebSocket Error:", error);
     };
 
-    socket.onclose = (event) => {
+    socket.onclose = () => {
         console.log("Disconnected from WebSocket server");
     };
 

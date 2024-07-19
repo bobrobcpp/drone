@@ -2,7 +2,7 @@ import GaugeChart from 'react-gauge-chart'
 
 import { useSensorContext } from "../../context/SensorContext";
 
-export default function Charts() {
+export default function DeviceStatus() {
     const sensorData = useSensorContext();
     const { batteryLevel, speed } = sensorData;
     return (

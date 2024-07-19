@@ -1,6 +1,6 @@
 export interface SensorData {
     altitude: number;
-    altitudeUnit: string;
+    units: { [k: string]: string };
     speed: number;
     batteryLevel: number;
     temperature: number;

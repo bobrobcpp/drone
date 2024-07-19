@@ -6,7 +6,8 @@ import { SensorData, ChartableData } from '../types/SensorData';
 
 export function useSensorData(): SensorData {
     const [altitude, setAltitude] = useState(0);
-    const [altitudeUnit, setAltitudeUnit] = useState('meters');
+    // Would change BE response to {value, unit} but would take extra processing step to chart data so keeping in FE
+    const [units] = useState({ altitude: 'm', speed: 'km/h', temperature: '°C', batteryLevel: '%', timeDiff: 's', timestamp: 'ms' });
     const [speed, setSpeed] = useState(0);
     const [batteryLevel, setBatteryLevel] = useState(0);
     const [temperature, setTemperature] = useState(0);
@@ -17,7 +18,6 @@ export function useSensorData(): SensorData {
 
     const updateSensorData = useCallback((newData: SensorData) => {
         if ('altitude' in newData) setAltitude(newData.altitude);
-        if ('altitudeUnit' in newData) setAltitudeUnit(newData.altitudeUnit);
         if ('speed' in newData) setSpeed(newData.speed);
         if ('batteryLevel' in newData) setBatteryLevel(newData.batteryLevel);
         if ('temperature' in newData) setTemperature(newData.temperature);
@@ -36,7 +36,7 @@ export function useSensorData(): SensorData {
 
     return {
         altitude,
-        altitudeUnit,
+        units,
         speed,
         batteryLevel,
         temperature,

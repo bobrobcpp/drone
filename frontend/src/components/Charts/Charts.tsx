@@ -17,8 +17,7 @@ export default function Charts() {
         return null;
     }
     // Remove unnecessary keys to display only chart data
-    const { timestamp, timeDiff, gpsCoordinates, chartData, altitudeUnit, batteryLevel, ...rest } = sensorData;
-
+    const { timestamp, timeDiff, gpsCoordinates, chartData, units, batteryLevel, ...rest } = sensorData;
     return (
         <div>
             <div className="charts">
@@ -26,7 +25,7 @@ export default function Charts() {
                     <LineChart width={600} height={300} data={sensorData.chartData} key={index}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="timeString" />
-                        <YAxis yAxisId="left" domain={[0, 40]} />
+                        <YAxis yAxisId="left" domain={[0, 40]} unit={units[key]} />
                         <YAxis yAxisId="right" orientation="right" dataKey={key} domain={[0, 40]} />
                         <Tooltip />
                         <Legend />

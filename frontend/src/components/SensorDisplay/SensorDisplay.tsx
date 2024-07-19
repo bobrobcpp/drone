@@ -7,7 +7,7 @@ export default function SensorDisplay() {
             <div className="data-item">
                 <span className="label">Altitude:</span>
                 <span>
-                    {sensorData.altitude} {sensorData.altitudeUnit}
+                    {sensorData.altitude} {sensorData.units.altitude}
                 </span>
             </div>
             <div className="data-item">
@@ -24,15 +24,15 @@ export default function SensorDisplay() {
             </div>
             <div className="data-item">
                 <span className="label">Battery Level:</span>
-                <span>{sensorData.batteryLevel}%</span>
+                <span>{sensorData.batteryLevel}{sensorData.units.batteryLevel}</span>
             </div>
             <div className="data-item">
                 <span className="label">Temperature:</span>
-                <span>{sensorData.temperature}°C</span>
+                <span>{sensorData.temperature}{sensorData.units.temperature}</span>
             </div>
             <div className="data-item">
                 <span className="label">Speed:</span>
-                <span>{sensorData.speed} m/s</span>
+                <span>{sensorData.speed} {sensorData.units.speed}</span>
             </div>
             <div className="data-item">
                 <span className="label">System Time:</span>
