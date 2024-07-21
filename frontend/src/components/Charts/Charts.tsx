@@ -22,8 +22,8 @@ export default function Charts() {
     return (
         <div className="charts">
             {Object.keys(rest).map((key, index) => (
-                <ResponsiveContainer width="95%" height={300}>
-                    <LineChart width={600} height={300} data={sensorData.chartData} key={index}>
+                <ResponsiveContainer width="95%" height={300} key={index}>
+                    <LineChart width={600} height={300} data={sensorData.chartData}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="timeString" />
                         <YAxis yAxisId="left" domain={[0, 40]} unit={units[key]} />

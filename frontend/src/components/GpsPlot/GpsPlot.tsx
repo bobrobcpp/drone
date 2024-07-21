@@ -27,7 +27,6 @@ export default function GpsPlot() {
         return () => window.removeEventListener('resize', updateDimensions);
     }, []);
 
-
     // Set up the grid and axes on the background canvas when dimensions change and onload
     useEffect(() => {
         const backCanvas = backCanvasRef.current;

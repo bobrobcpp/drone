@@ -1,7 +1,7 @@
 import { SensorData } from '../types/SensorData';
 
 export function connectWebSocket(onDataReceived: (data: SensorData) => void) {
-    const wsUrl = "ws://localhost:3000/telemetry";
+    const wsUrl = "ws://localhost:4000/telemetry";
     const socket = new WebSocket(wsUrl);
 
     socket.onopen = () => {

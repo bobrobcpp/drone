@@ -26,7 +26,9 @@ export function useSensorData(): SensorData {
             setTimestamp(newData.timestamp);
             setTimeDiff((newData.timestamp - Date.now()) / 1000);
         }
-        setChartData(prevChartData => processSensorDataForCharting(newData, prevChartData));
+        // Limit the number of data points to display on the chart to 1000
+        const maxDataPoints = 1000;
+        setChartData(prevChartData => processSensorDataForCharting(newData, prevChartData, maxDataPoints));
     }, []);
 
     useEffect(() => {
