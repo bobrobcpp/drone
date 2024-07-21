@@ -6,6 +6,7 @@ import {
     Tooltip,
     XAxis,
     YAxis,
+    ResponsiveContainer
 } from "recharts";
 
 import { useSensorContext } from "../../context/SensorContext";
@@ -17,11 +18,11 @@ export default function Charts() {
         return null;
     }
     // Remove unnecessary keys to display only chart data
-    const { timestamp, timeDiff, gpsCoordinates, chartData, units, batteryLevel, ...rest } = sensorData;
+    const { timestamp, timeDiff, gpsCoordinates, chartData, units, ...rest } = sensorData;
     return (
-        <div>
-            <div className="charts">
-                {Object.keys(rest).map((key, index) => (
+        <div className="charts">
+            {Object.keys(rest).map((key, index) => (
+                <ResponsiveContainer width="95%" height={300}>
                     <LineChart width={600} height={300} data={sensorData.chartData} key={index}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="timeString" />
@@ -37,8 +38,8 @@ export default function Charts() {
                             name={key.charAt(0).toUpperCase() + key.slice(1)}
                         />
                     </LineChart>
-                ))}
-            </div>
+                </ResponsiveContainer>
+            ))}
         </div>
     );
 }

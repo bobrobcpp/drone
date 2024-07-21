@@ -37,10 +37,10 @@ h1, h2 {
   padding-top: 20px;
   gap: 20px;
   grid-template-columns: 1fr;
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
   margin-top: 20px;
+  @media (min-width: 950px) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .gps-plot {
@@ -48,8 +48,6 @@ h1, h2 {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   padding-top: 20px;
-  width: 800px;
-  height: 400px;
 }
 
 canvas {
@@ -63,8 +61,9 @@ canvas {
   display: grid;
   gap: 10px;
   grid-template-columns: 1fr;
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr 1fr;
+  margin-left: 40px;
+  @media (min-width: 950px) {
+    grid-template-columns: 1fr 2fr 1fr;
   }
 }
 
@@ -72,10 +71,11 @@ canvas {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 20px;
-  @media (min-width: 768px) {
+  place-items: center;
+  max-width: 100%;
+  @media (min-width: 950px) {
     grid-template-columns: 1fr;
   }
-  place-items: center;
 }
 
 .gauge-item {
