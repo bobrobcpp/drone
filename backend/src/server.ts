@@ -1,14 +1,27 @@
 import { WebSocketServer, WebSocket } from 'ws';
-import TG from './TelemetryGenerator';
+import TG from './dataGenerators/TelemetryGenerator/TelemetryGenerator';
+import { CustomWebSocket } from './types/CustomWebSocket.types';
 
-const wss = new WebSocketServer({ port: 3000, path: '/telemetry' });
+const wss = new WebSocketServer({ port: 4000, path: '/telemetry' });
 
-function initializeStream(ws) {
+wss.on('connection', (ws: CustomWebSocket) => {
+    console.log('Client connected');
+
+    ws.dataStream = initializeStream(ws);
+
+    ws.on('close', () => {
+        console.log('Client disconnected');
+        if (ws.dataStream) {
+            ws.dataStream.destroy();
+        }
+    });
+});
+
+export function initializeStream(ws: CustomWebSocket) {
     const dataStream = new TG({ objectMode: true });
 
     dataStream.on('data', (data) => {
         if (ws.readyState === WebSocket.OPEN) {
-            console.log('Sending data to client:', data);
             ws.send(data);
         }
     });
@@ -34,29 +47,16 @@ function initializeStream(ws) {
     return dataStream;
 }
 
-function restartStream(ws, oldStream) {
-    console.log('Restarting data stream');
+export function restartStream(ws, oldStream) {
     oldStream.removeAllListeners();
     oldStream.destroy();
 
-    // Short delay before restarting to avoid rapid restart loops
     setTimeout(() => {
         if (ws.readyState === WebSocket.OPEN) {
             const newStream = initializeStream(ws);
-            ws.dataStream = newStream; // Store reference to new stream
+            ws.dataStream = newStream;
         }
     }, 1000);
 }
 
-wss.on('connection', (ws) => {
-    console.log('Client connected');
-
-    ws.dataStream = initializeStream(ws);
-
-    ws.on('close', () => {
-        console.log('Client disconnected');
-        if (ws.dataStream) {
-            ws.dataStream.destroy();
-        }
-    });
-});
+export { wss };

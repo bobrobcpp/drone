@@ -1,4 +1,4 @@
-export function generateTemperatureValue(simulatedTemperatureValue) {
+export function generateTemperature(simulatedTemperatureValue) {
     // Simulate temperature increasing over time but reset to 20 when overheated
     const doRarely = Math.random() < 0.1;
     if (doRarely) {

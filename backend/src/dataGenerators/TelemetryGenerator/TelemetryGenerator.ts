@@ -1,10 +1,10 @@
 import { Readable } from 'stream';
 
-import { generateAltitude } from './dataGenerators/generateAltitude';
-import { generateGpsCoordinates } from './dataGenerators/generateGpsCoordinates';
-import { generateTemperatureValue } from './dataGenerators/generateTemperature';
-import { generateBatteryValue } from './dataGenerators/generateBatteryLevel';
-import { generateSpeed } from './dataGenerators/generateSpeed';
+import { generateAltitude } from '../generateAltitude/generateAltitude';
+import { generateGpsCoordinates } from '../generateGpsCoordinates/generateGpsCoordinates';
+import { generateTemperature } from '../generateTemperature/generateTemperature';
+import { generateBatteryLevel } from '../generateBatteryLevel/generateBatteryLevel';
+import { generateSpeed } from '../generateSpeed/generateSpeed';
 
 export default class TelemetryGenerator extends Readable {
   static simulatedBatteryValue: number;
@@ -26,11 +26,13 @@ export default class TelemetryGenerator extends Readable {
   }
 
   generateTelemetryData() {
+    TelemetryGenerator.simulatedTemperatureValue = generateTemperature(TelemetryGenerator.simulatedTemperatureValue);
+    TelemetryGenerator.simulatedBatteryValue = generateBatteryLevel(TelemetryGenerator.simulatedBatteryValue);
     return {
       altitude: generateAltitude(),
       gpsCoordinates: generateGpsCoordinates(),
-      temperature: generateTemperatureValue(TelemetryGenerator.simulatedTemperatureValue),
-      batteryLevel: generateBatteryValue(TelemetryGenerator.simulatedBatteryValue),
+      temperature: TelemetryGenerator.simulatedTemperatureValue,
+      batteryLevel: TelemetryGenerator.simulatedBatteryValue,
       speed: generateSpeed(),
       timestamp: Date.now()
     };

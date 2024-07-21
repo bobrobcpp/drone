@@ -1,4 +1,4 @@
-export function generateBatteryValue(simulatedBatteryValue) {
+export function generateBatteryLevel(simulatedBatteryValue) {
     // Simulate battery level decreasing over time but reset to 100% when drained
     const doRarely = Math.random() < 0.1;
     if (doRarely) {
