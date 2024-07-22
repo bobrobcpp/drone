@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { generateTemperature } from "../dataGenerators/generateTemperature/generateTemperature";
+import { generateTemperature } from "./generateTemperature";
 
 describe('generateTemperature', () => {
     beforeEach(() => {

@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Drone simulation backend node server",
-  "main": "src/server.ts",
+  "main": "src/server/server.ts",
   "type": "module",
   "scripts": {
     "test": "jest --config ./jest.config.json --coverage",
-    "start": "tsx src/server.ts"
+    "start": "tsx src/server/server.ts"
   },
   "author": "R King",
   "license": "ISC",

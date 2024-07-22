@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { generateBatteryLevel } from "../dataGenerators/generateBatteryLevel/generateBatteryLevel";
+import { generateBatteryLevel } from "./generateBatteryLevel";
 
 describe('generateBatteryLevel', () => {
     beforeEach(() => {

@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { WebSocket, WebSocketServer } from 'ws';
-import { initializeStream } from '../server';
+import { initializeStream } from './server';
 import TG from '../dataGenerators/TelemetryGenerator/TelemetryGenerator';
 
 jest.mock('ws');
@@ -40,7 +40,7 @@ describe('WebSocket Server', () => {
         WebSocketServer.mockImplementation(() => mockWss);
 
         // Run the server code to set up the connection handler
-        import('../server');
+        import('./server');
     });
 
     afterEach(() => {

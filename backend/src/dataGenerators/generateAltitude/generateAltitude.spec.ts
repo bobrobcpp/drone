@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { generateAltitude } from "../dataGenerators/generateAltitude/generateAltitude";
+import { generateAltitude } from "./generateAltitude";
 
 describe('generateAltitude', () => {
     test('generateAltitude returns number within expected range', () => {

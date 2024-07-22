@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { generateGpsCoordinates } from "../dataGenerators/generateGpsCoordinates/generateGpsCoordinates";
+import { generateGpsCoordinates } from "./generateGpsCoordinates";
 
 test('generateGpsCoordinates returns object with easting and northing', () => {
     const coords = generateGpsCoordinates();

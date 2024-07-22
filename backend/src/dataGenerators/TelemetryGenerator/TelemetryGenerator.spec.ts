@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Readable } from 'stream';
-import TelemetryGenerator from '../dataGenerators/TelemetryGenerator/TelemetryGenerator';
+import TelemetryGenerator from './TelemetryGenerator';
 
 jest.useFakeTimers();
 

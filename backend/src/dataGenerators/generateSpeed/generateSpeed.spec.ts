@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { generateSpeed } from "../dataGenerators/generateSpeed/generateSpeed";
+import { generateSpeed } from "./generateSpeed";
 
 describe('generateSpeed', () => {
     test('generateSpeed returns number within expected range', () => {

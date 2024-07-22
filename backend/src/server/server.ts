@@ -1,6 +1,6 @@
 import { WebSocketServer, WebSocket } from 'ws';
-import TG from './dataGenerators/TelemetryGenerator/TelemetryGenerator';
-import { CustomWebSocket } from './types/CustomWebSocket.types';
+import TG from '../dataGenerators/TelemetryGenerator/TelemetryGenerator';
+import { CustomWebSocket } from '../types/CustomWebSocket.types';
 
 const wss = new WebSocketServer({ port: 4000, path: '/telemetry' });
 
