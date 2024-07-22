@@ -21,8 +21,12 @@ export default class TelemetryGenerator extends Readable {
   _read() {
     if (!this._interval) {
       this._interval = setInterval(() => {
-        const telemetryData = this.generateTelemetryData();
-        this.push(JSON.stringify(telemetryData));
+        try {
+          const telemetryData = this.generateTelemetryData();
+          this.push(JSON.stringify(telemetryData));
+        } catch (error) {
+          this.emit('error', error);
+        }
       }, 1000);
     }
   }

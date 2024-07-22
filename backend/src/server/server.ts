@@ -6,7 +6,6 @@ const wss = new WebSocketServer({ port: 4000, path: '/telemetry' });
 
 wss.on('connection', (ws: CustomWebSocket) => {
     console.log('Client connected');
-
     ws.dataStream = initializeStream(ws);
 
     ws.on('close', () => {
@@ -15,6 +14,10 @@ wss.on('connection', (ws: CustomWebSocket) => {
             ws.dataStream.destroy();
         }
     });
+
+    wss.on('error', (error) => {
+        console.error('WebSocket Server Error:', error);
+    });
 });
 
 export function initializeStream(ws: CustomWebSocket) {
@@ -22,7 +25,11 @@ export function initializeStream(ws: CustomWebSocket) {
 
     dataStream.on('data', (data) => {
         if (ws.readyState === WebSocket.OPEN) {
-            ws.send(data);
+            try {
+                ws.send(data);
+            } catch (error) {
+                console.error('Error sending data:', error);
+            }
         }
     });
 
@@ -36,14 +43,6 @@ export function initializeStream(ws: CustomWebSocket) {
         restartStream(ws, dataStream);
     });
 
-    dataStream.on('close', () => {
-        console.log('Stream closed');
-    });
-
-    dataStream.on('finish', () => {
-        console.log('Stream finished');
-    });
-
     return dataStream;
 }
 
@@ -53,8 +52,12 @@ export function restartStream(ws, oldStream) {
 
     setTimeout(() => {
         if (ws.readyState === WebSocket.OPEN) {
-            const newStream = initializeStream(ws);
-            ws.dataStream = newStream;
+            try {
+                const newStream = initializeStream(ws);
+                ws.dataStream = newStream;
+            } catch (error) {
+                console.error('Error restarting stream:', error);
+            }
         }
     }, 1000);
 }
