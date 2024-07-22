@@ -71,7 +71,7 @@ export default function GpsPlot() {
         }
     };
 
-    const updateGPSMap = ({ latitude, longitude }: SensorData['gpsCoordinates']) => {
+    const updateGPSMap = ({ easting, northing }: SensorData['gpsCoordinates']) => {
         const frontCanvas = frontCanvasRef.current;
         const ctx = frontCanvas!.getContext("2d");
         ctx!.clearRect(0, 0, dimensions.width, dimensions.height);
@@ -81,7 +81,7 @@ export default function GpsPlot() {
             ctx!.fillStyle = 'green';
             ctx!.beginPath();
             // @ts-ignore
-            ctx!.arc(position.longitude * scalingFactor.x, dimensions.height - position.latitude * scalingFactor.y, 3, 0, 2 * Math.PI);
+            ctx!.arc(position.easting * scalingFactor.x, dimensions.height - position.northing * scalingFactor.y, 3, 0, 2 * Math.PI);
             ctx!.fill();
         });
         if (positions.length > 100) {
@@ -90,7 +90,7 @@ export default function GpsPlot() {
         // Draw drone
         ctx!.fillStyle = "red";
         ctx!.beginPath();
-        ctx!.arc(longitude * scalingFactor.x, dimensions.height - latitude * scalingFactor.y, 7, 0, Math.PI * 2);
+        ctx!.arc(easting * scalingFactor.x, dimensions.height - northing * scalingFactor.y, 7, 0, Math.PI * 2);
         ctx!.fill();
     };
 

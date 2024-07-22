@@ -11,15 +11,15 @@ export default function SensorDisplay() {
                 </span>
             </div>
             <div className="data-item">
-                <span className="label">Lat:</span>
+                <span className="label">Easting:</span>
                 <span>
-                    {sensorData.gpsCoordinates.latitude}
+                    {sensorData.gpsCoordinates.easting}
                 </span>
             </div>
             <div className="data-item">
-                <span className="label">Lon:</span>
+                <span className="label">Northing:</span>
                 <span>
-                    {sensorData.gpsCoordinates.longitude}
+                    {sensorData.gpsCoordinates.northing}
                 </span>
             </div>
             <div className="data-item">

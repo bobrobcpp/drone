@@ -17,7 +17,7 @@ describe('useSensorData', () => {
                 speed: 50,
                 batteryLevel: 80,
                 temperature: 25,
-                gpsCoordinates: { latitude: 100, longitude: 200 },
+                gpsCoordinates: { easting: 200, northing: 100 },
                 timestamp: 1000000
             });
             return jest.fn();
@@ -33,7 +33,7 @@ describe('useSensorData', () => {
             speed: 50,
             batteryLevel: 80,
             temperature: 25,
-            gpsCoordinates: { latitude: 100, longitude: 200 },
+            gpsCoordinates: { easting: 200, northing: 100 },
         }));
         expect(result.current.timestamp).toBeGreaterThan(0);
         expect(result.current.timeDiff).not.toBe(0);

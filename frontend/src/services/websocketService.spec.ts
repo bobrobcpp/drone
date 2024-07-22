@@ -51,7 +51,7 @@ describe('connectWebSocket', () => {
             speed: 50,
             batteryLevel: 80,
             temperature: 25,
-            gpsCoordinates: { latitude: 40, longitude: -74 },
+            gpsCoordinates: { easting: 20, northing: 40 },
             timestamp: 100000
         };
 

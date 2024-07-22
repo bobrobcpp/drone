@@ -1,9 +1,9 @@
 export function generateGpsCoordinates() {
-    const baseLat = 200;
-    const baseLon = 400;
+    const baseEasting = 400;
+    const baseNorthing = 200;
     const variation = 50;
     return {
-        latitude: +(baseLat + Math.random() * variation * 2 - variation).toFixed(6),
-        longitude: +(baseLon + Math.random() * variation * 2 - variation).toFixed(6)
+        easting: +(baseEasting + Math.random() * variation * 2 - variation).toFixed(6),
+        northing: +(baseNorthing + Math.random() * variation * 2 - variation).toFixed(6)
     };
 }

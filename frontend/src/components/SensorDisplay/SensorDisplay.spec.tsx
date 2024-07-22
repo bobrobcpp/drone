@@ -10,7 +10,7 @@ jest.mock("../../context/SensorContext");
 describe('SensorDisplay', () => {
     const mockSensorData = {
         altitude: 1000,
-        gpsCoordinates: { latitude: 100.01, longitude: 200.2 },
+        gpsCoordinates: { easting: 200.2, northing: 100.01 },
         batteryLevel: 80,
         temperature: 25,
         speed: 50,
@@ -34,11 +34,11 @@ describe('SensorDisplay', () => {
         expect(screen.getByText('Altitude:')).toBeInTheDocument();
         expect(screen.getByText('1000 m')).toBeInTheDocument();
 
-        expect(screen.getByText('Lat:')).toBeInTheDocument();
-        expect(screen.getByText('100.01')).toBeInTheDocument();
-
-        expect(screen.getByText('Lon:')).toBeInTheDocument();
+        expect(screen.getByText('Easting:')).toBeInTheDocument();
         expect(screen.getByText('200.2')).toBeInTheDocument();
+
+        expect(screen.getByText('Northing:')).toBeInTheDocument();
+        expect(screen.getByText('100.01')).toBeInTheDocument();
 
         expect(screen.getByText('Battery Level:')).toBeInTheDocument();
         expect(screen.getByText('80%')).toBeInTheDocument();
@@ -60,7 +60,7 @@ describe('SensorDisplay', () => {
         const incompleteData = {
             ...mockSensorData,
             altitude: undefined,
-            gpsCoordinates: { latitude: undefined, longitude: undefined },
+            gpsCoordinates: { easting: undefined, northing: undefined },
         };
         (useSensorContext as jest.Mock).mockReturnValue(incompleteData);
 
@@ -69,7 +69,7 @@ describe('SensorDisplay', () => {
         expect(screen.getByText('Altitude:')).toBeInTheDocument();
         expect(screen.getByText('m')).toBeInTheDocument();
 
-        expect(screen.getByText('Lat:')).toBeInTheDocument();
-        expect(screen.getByText('Lon:')).toBeInTheDocument();
+        expect(screen.getByText('Easting:')).toBeInTheDocument();
+        expect(screen.getByText('Northing:')).toBeInTheDocument();
     });
 });

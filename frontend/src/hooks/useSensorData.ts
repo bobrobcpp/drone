@@ -11,7 +11,7 @@ export function useSensorData(): SensorData {
     const [speed, setSpeed] = useState(0);
     const [batteryLevel, setBatteryLevel] = useState(0);
     const [temperature, setTemperature] = useState(0);
-    const [gpsCoordinates, setGpsCoordinates] = useState({ latitude: 0, longitude: 0 });
+    const [gpsCoordinates, setGpsCoordinates] = useState({ easting: 0, northing: 0 });
     const [timestamp, setTimestamp] = useState(0);
     const [timeDiff, setTimeDiff] = useState(0);
     const [chartData, setChartData] = useState([] as ChartableData[]);

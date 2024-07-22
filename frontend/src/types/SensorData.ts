@@ -5,8 +5,8 @@ export interface SensorData {
     batteryLevel: number;
     temperature: number;
     gpsCoordinates: {
-        latitude: number;
-        longitude: number;
+        easting: number;
+        northing: number;
     };
     timestamp: number;
     timeDiff: number;

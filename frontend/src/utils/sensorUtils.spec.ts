@@ -19,7 +19,7 @@ describe('processSensorDataForCharting', () => {
             speed: 50,
             batteryLevel: 80,
             temperature: 25,
-            gpsCoordinates: { latitude: 100, longitude: 200 },
+            gpsCoordinates: { northing: 100, easting: 200 },
             timestamp: testTimestamp
         };
         const prevChartData: ChartableData[] = [];
@@ -39,7 +39,7 @@ describe('processSensorDataForCharting', () => {
             speed: 60,
             batteryLevel: 70,
             temperature: 30,
-            gpsCoordinates: { latitude: 100, longitude: 200 },
+            gpsCoordinates: { northing: 100, easting: 200 },
             timestamp: testTimestamp
         };
         const prevChartData: ChartableData[] = [{
@@ -47,7 +47,7 @@ describe('processSensorDataForCharting', () => {
             speed: 50,
             batteryLevel: 80,
             temperature: 25,
-            gpsCoordinates: { latitude: 100, longitude: 200 },
+            gpsCoordinates: { northing: 100, easting: 200 },
             timestamp: testTimestamp,
             timeString: '11:59:00'
         }];
@@ -68,7 +68,7 @@ describe('processSensorDataForCharting', () => {
             speed: index,
             batteryLevel: index,
             temperature: index,
-            gpsCoordinates: { latitude: index, longitude: index },
+            gpsCoordinates: { northing: index, easting: index },
             timestamp: testTimestamp,
             timeString: `12:00:${index.toString().padStart(2, '0')}`
         }));
@@ -77,7 +77,7 @@ describe('processSensorDataForCharting', () => {
             speed: 1001,
             batteryLevel: 1001,
             temperature: 1001,
-            gpsCoordinates: { latitude: 100, longitude: 200 },
+            gpsCoordinates: { northing: 100, easting: 200 },
             timestamp: testTimestamp
         };
 
@@ -97,7 +97,7 @@ describe('processSensorDataForCharting', () => {
             speed: 50,
             batteryLevel: 80,
             temperature: 25,
-            gpsCoordinates: { latitude: 100, longitude: 200 },
+            gpsCoordinates: { northing: 100, easting: 200 },
             timestamp: testTimestamp
         };
 

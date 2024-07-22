@@ -13,7 +13,7 @@ HTMLCanvasElement.prototype.getContext = mockGetContext;
 
 describe('GpsPlot', () => {
     const mockSensorData = {
-        gpsCoordinates: { latitude: 100, longitude: 200 },
+        gpsCoordinates: { easting: 200, northing: 100 },
     };
 
     beforeEach(() => {
@@ -90,7 +90,7 @@ describe('GpsPlot', () => {
 
         // Simulate GPS coordinate change
         const newMockSensorData = {
-            gpsCoordinates: { latitude: 150, longitude: 250 },
+            gpsCoordinates: { easting: 250, northing: 150 },
         };
         (useSensorContext as jest.Mock).mockReturnValue(newMockSensorData);
 
