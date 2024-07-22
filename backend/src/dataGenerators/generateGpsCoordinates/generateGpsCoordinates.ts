@@ -1,4 +1,6 @@
-export function generateGpsCoordinates() {
+import { SensorData } from "../../types/SensorData";
+
+export function generateGpsCoordinates(): SensorData['gpsCoordinates'] {
     const baseEasting = 400;
     const baseNorthing = 200;
     const variation = 50;

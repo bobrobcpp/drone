@@ -1,5 +1,7 @@
 import { Readable } from 'stream';
 
+import { SensorData } from '../../types/SensorData';
+
 import { generateAltitude } from '../generateAltitude/generateAltitude';
 import { generateGpsCoordinates } from '../generateGpsCoordinates/generateGpsCoordinates';
 import { generateTemperature } from '../generateTemperature/generateTemperature';
@@ -25,7 +27,7 @@ export default class TelemetryGenerator extends Readable {
     }
   }
 
-  generateTelemetryData() {
+  generateTelemetryData(): SensorData {
     TelemetryGenerator.simulatedTemperatureValue = generateTemperature(TelemetryGenerator.simulatedTemperatureValue);
     TelemetryGenerator.simulatedBatteryValue = generateBatteryLevel(TelemetryGenerator.simulatedBatteryValue);
     return {
