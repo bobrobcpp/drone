@@ -12,9 +12,8 @@ This application simulates and visualizes real-time telemetry data from a drone.
 ## Getting Started
 
 1. Clone the repository
-2. Install Docker and Docker Compose
-3. Run `docker-compose up --build` to start the application
-4. Access the frontend dashboard at `http://localhost`
+2. Run `docker-compose up --build` from project root to start the application
+3. Access the frontend dashboard at `http://localhost`
   
 
    
